@@ -62,6 +62,24 @@ START → Call winnr_get_dns_status for the domain
   │
   ├─ All records OK → DNS is fine. Problem is elsewhere. Go to Tree B or C.
   │
+  ├─ NS records missing ("No NS records found")
+  │   → Domain may not be registered at any registrar.
+  │   ├─ Check domain's `registrar` field in Firestore:
+  │   │   ├─ registrar = "external" (BYOD) → Domain was added, NOT purchased through Winnr.
+  │   │   │   → Verify WHOIS: `whois {domain}` — if "No match", domain is unregistered.
+  │   │   │   → Customer likely confused "add domain" with "purchase domain".
+  │   │   │   → Fix: Customer must register domain with a registrar (Namecheap, GoDaddy,
+  │   │   │     Cloudflare, etc.) then point NS to the CloudDNS nameservers shown in Winnr.
+  │   │   │   → OR: Delete external domains and re-add via the purchase flow.
+  │   │   │   → Check Stripe for domain charges — if none, purchase was never attempted.
+  │   │   └─ registrar = "dynadot" → Domain was purchased but may have failed silently.
+  │   │       → Check WHOIS to confirm registration.
+  │   │       → Check CloudWatch logs for `should_register` and Dynadot API errors.
+  │   │       → Check Stripe for a "Domain registration:" invoice line item.
+  │   └─ If NS exist but wrong → Nameservers not pointed to CloudDNS.
+  │       → Provide the correct NS records (ns1-4.programessentials.com for clouddns3, etc.)
+  │       → Propagation: 24-72 hours for nameserver changes.
+  │
   ├─ MX missing/wrong
   │   ├─ Winnr-managed DNS → Check if domain setup job completed (winnr_get_job)
   │   │   ├─ Job still running → Wait. DNS setup takes 1-5 minutes.
@@ -218,9 +236,25 @@ START → Get the job ID from the failed operation
   │   ├─ "Payment failed" → Stripe card issue. Update at app.winnr.app.
   │   └─ Other → Report the error message to user. May need manual fix in dashboard.
   │
-  └─ Job status = "completed" but resource not visible
-      → Eventual consistency. Wait 30 seconds and re-query.
-      → If still not visible after 2 minutes, check for errors in job details.
+  ├─ Job status = "completed" but resource not visible
+  │   → Eventual consistency. Wait 30 seconds and re-query.
+  │   → If still not visible after 2 minutes, check for errors in job details.
+  │
+  └─ Domain status = "complete" but DNS failing / warming paused
+      → This is the "false complete" scenario. Check these in order:
+      ├─ 1. Check `registrar` field:
+      │   ├─ "external" → Domain was added as BYOD, not purchased.
+      │   │   → Run `whois {domain}` — if unregistered, go to Tree A (NS missing).
+      │   └─ "dynadot" → Should be registered. Check WHOIS to confirm.
+      ├─ 2. Check Stripe for domain charges:
+      │   → Search invoices for "Domain registration:" line items.
+      │   → No charges = purchase never attempted (BYOD confusion).
+      ├─ 3. Check CloudWatch SQS consumer logs:
+      │   → Look for `should_register` flag in the domain create job.
+      │   → `should_register: False` = BYOD path (no registration attempted).
+      └─ 4. Check `dns_health_status`:
+          → "failing" with "No NS records" = domain not registered or NS not pointed.
+          → "failing" with specific record errors = DNS misconfiguration (Tree A).
 ```
 
 ---
