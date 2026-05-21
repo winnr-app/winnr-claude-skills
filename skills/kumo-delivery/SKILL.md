@@ -28,12 +28,14 @@ allowed-tools:
 | kumo6 | `kumo6` | Hetzner | yes | 148.251.28.64/27 + 178.63.7.0/26 |
 | kumo7 | `kumo7` | Hivelocity | yes | 37.72.175.177-190 |
 | kumo8 | `kumo8` | OVH | yes | 15.204.2.225-253 |
+| kumo9 | `kumo9` | HostZealot | yes | 185.33.86.138 + 185.33.86.146-175 |
+| kumo10 | `kumo10` | Leaseweb | yes | 23.81.206.196 + 108.62.16.65-95 |
 
 kumo3 is decommissioned. kumo5 is suspended by Contabo.
 
 ## How to run
 
-When the user asks about kumo delivery, run the analysis script below via SSH on the requested instance(s). If no specific instance is mentioned, check all active instances (kumo1, kumo2, kumo4, kumo6, kumo7, kumo8).
+When the user asks about kumo delivery, run the analysis script below via SSH on the requested instance(s). If no specific instance is mentioned, check all active instances (kumo1, kumo2, kumo4, kumo6, kumo7, kumo8, kumo9, kumo10).
 
 ### Log location and format
 

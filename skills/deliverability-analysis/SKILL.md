@@ -95,7 +95,7 @@ Then find the mailcow + relay via Firestore. The field layout:
 Use `collection_group('email_users')` filtered on `full_address=="any@<domain>"` to find the account id without scanning all accounts. (Requires an index; if missing, fall back to scanning `accounts` for a domain doc with `domain==<domain>`.)
 
 The `relay_name` values that can appear:
-- `kumo1`, `kumo4`, `kumo5`, `kumo6`, `kumo7`, `kumo8`, `kumo9` — real Kumo relays
+- `kumo1`, `kumo4`, `kumo5`, `kumo6`, `kumo7`, `kumo8`, `kumo9`, `kumo10` — real Kumo relays
 - `ses1` — direct SES
 - **Heads up:** `kumo1` on AWS sometimes routes outbound via SES (observed egress IPs in the `54.240.x.x` range). If you see a `kumo1`-labeled cell producing AWS egress IPs, it's SES-backed.
 - Deprecated: `kumo2`, `kumo3`
