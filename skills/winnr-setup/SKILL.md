@@ -16,6 +16,18 @@ allowed-tools:
 > Automates the full infrastructure setup: domains → DNS → mailboxes → warming.
 > Every step follows cold email best practices so new users get it right the first time.
 
+**When to use this vs. `/winnr connect`**
+- Use `/winnr setup` when the user wants Winnr to **buy new domains** for
+  cold outreach.
+- Use `/winnr connect` when the user **already owns** domains (at
+  Namecheap, GoDaddy, Cloudflare, Porkbun, etc.) and wants to bring them
+  to Winnr — that skill handles both nameserver-mode and manual-DNS mode
+  BYOD setups.
+
+If the user is mixing both ("I have 2 domains already, but I also want to
+buy 5 more"), run this skill for the purchase and hand the connect part
+off to `/winnr connect` in the same session.
+
 ---
 
 ## Workflow Overview

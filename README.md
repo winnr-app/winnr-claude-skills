@@ -8,7 +8,9 @@ Guided AI workflows for cold email infrastructure. These [Claude Code](https://c
 
 | Command | What it does |
 |---------|-------------|
-| `/winnr setup` | Full infrastructure wizard: domains, DNS, mailboxes, warming |
+| `/winnr setup` | Buy new domains + set up DNS, mailboxes, warming from scratch |
+| `/winnr connect` | Bring your own domains (BYOD) — nameserver mode or manual-DNS |
+| `/winnr inbox` | Triage replies across every mailbox; draft responses |
 | `/winnr health` | Traffic-light health report with 0-100 scoring |
 | `/winnr troubleshoot` | DNS and deliverability diagnostic decision trees |
 | `/winnr scale <N>` | Scale up or down with best-practice ratios |
@@ -124,7 +126,9 @@ Skills encode *what to do and in what order*. The MCP server handles *how to tal
 | Skill | File | Purpose |
 |-------|------|---------|
 | `winnr` | `skills/winnr/SKILL.md` | Parent orchestrator — routes commands, shared knowledge |
-| `winnr-setup` | `skills/winnr-setup/SKILL.md` | Infrastructure setup wizard |
+| `winnr-setup` | `skills/winnr-setup/SKILL.md` | Buy new domains + set up mailboxes and warming |
+| `winnr-connect` | `skills/winnr-connect/SKILL.md` | Bring your own domains (nameserver or manual-DNS) |
+| `winnr-inbox` | `skills/winnr-inbox/SKILL.md` | Reply triage and drafted responses |
 | `winnr-health` | `skills/winnr-health/SKILL.md` | Health scoring and monitoring |
 | `winnr-troubleshoot` | `skills/winnr-troubleshoot/SKILL.md` | Diagnostic decision trees |
 | `winnr-scale` | `skills/winnr-scale/SKILL.md` | Scale up/down operations |

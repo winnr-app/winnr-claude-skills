@@ -26,7 +26,9 @@ allowed-tools:
 
 | Command | What It Does |
 |---------|-------------|
-| `/winnr setup` | Full infrastructure wizard: domains → DNS → mailboxes → warming |
+| `/winnr setup` | Buy new domains + set up DNS, mailboxes, warming from scratch |
+| `/winnr connect` | Bring your own domains (BYOD): nameserver or manual-DNS mode |
+| `/winnr inbox` | Triage replies across every mailbox, draft responses |
 | `/winnr health` | Traffic-light health report across all domains and mailboxes |
 | `/winnr troubleshoot` | DNS and deliverability diagnostic decision tree |
 | `/winnr scale <N>` | Scale infrastructure up or down with best-practice ratios |
@@ -55,7 +57,7 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_get_account` | read | Account details, plan, limits |
 | `winnr_get_usage` | read | Domains/users used vs. plan limits |
 
-### Domains (12)
+### Domains (13)
 | Tool | Type | Description |
 |------|------|-------------|
 | `winnr_list_domains` | read | List all domains with status and user counts |
@@ -164,11 +166,18 @@ Output format:
 **Warming**: {active} active, avg health {score}, avg inbox rate {rate}%
 ```
 
-### `/winnr setup` → Delegate to `winnr-setup` sub-skill
+### `/winnr setup` → Delegate to `winnr-setup` sub-skill (buy new domains)
+### `/winnr connect` → Delegate to `winnr-connect` sub-skill (bring your own domains)
+### `/winnr inbox` → Delegate to `winnr-inbox` sub-skill (reply triage & response)
 ### `/winnr health` → Delegate to `winnr-health` sub-skill
 ### `/winnr troubleshoot` → Delegate to `winnr-troubleshoot` sub-skill
 ### `/winnr scale` → Delegate to `winnr-scale` sub-skill
 ### `/winnr export` → Delegate to `winnr-export` sub-skill
+
+### Setup vs. Connect — pick the right one
+
+- User is starting fresh, wants Winnr to **buy** domains → `/winnr setup`
+- User **already owns** domains, wants to use them with Winnr → `/winnr connect`
 
 ---
 
@@ -193,6 +202,8 @@ When MCP tools return errors, provide actionable next steps:
 | Command | Output |
 |---------|--------|
 | `/winnr setup` | `WINNR-SETUP-REPORT.md` |
+| `/winnr connect` | `WINNR-CONNECT-REPORT.md` |
+| `/winnr inbox` | `WINNR-INBOX-REPORT.md` (or inline for small volumes) |
 | `/winnr health` | `WINNR-HEALTH-REPORT.md` |
 | `/winnr troubleshoot` | `WINNR-DIAGNOSTIC-REPORT.md` |
 | `/winnr scale` | `WINNR-SCALE-REPORT.md` |

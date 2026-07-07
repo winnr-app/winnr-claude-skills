@@ -20,6 +20,12 @@ allowed-tools:
 
 ## Supported Export Formats
 
+The authoritative list comes from the Winnr API (`winnr_export_email_users`
+accepts whatever formats the server supports today). This table reflects
+the sequencers Winnr supports as of writing — if the user asks for a
+format not in this list, try it against the tool anyway; the API will
+tell you if it's unsupported.
+
 | Format | Tool | Command |
 |--------|------|---------|
 | `default` | Generic CSV (all fields) | `/winnr export` |
