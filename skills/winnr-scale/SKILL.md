@@ -54,8 +54,8 @@ The user specifies a target number of new mailboxes. The skill calculates how ma
 Follow the same domain strategy as `winnr-setup`:
 
 1. Ask user for keyword/theme if not provided
-2. `winnr_suggest_domains` → generate candidates
-3. `winnr_search_domains_bulk` → check availability
+2. Generate candidate names yourself (brand + short word, .com first — never outreach/blast/bulk words)
+3. `winnr_search_domains_bulk` → check availability and price
 4. Select cheapest available domains
 5. Generate 3-5 mailboxes per domain with professional names
 6. Present the full plan for user approval
@@ -64,7 +64,7 @@ Follow the same domain strategy as `winnr-setup`:
 
 1. `winnr_purchase_domains` (with user confirmation — charges Stripe)
 2. Wait for DNS propagation
-3. `winnr_bulk_create_email_users`
+3. `winnr_bulk_create_email_users` (one call per domain)
 4. `winnr_enable_warming` on all new mailboxes
 5. Generate `WINNR-SCALE-REPORT.md`
 
@@ -78,9 +78,9 @@ When adding more than 20 mailboxes at once, stagger the warming:
 This prevents a large burst of new warming activity from triggering provider suspicion.
 
 For the skill, enable all warming at once but set conservative settings:
-- `daily_limit`: 10 (lower than the setup wizard's 15)
-- `ramp_up`: true
-- `reply_rate`: 30
+- `emails_per_day`: 10 (lower than the setup wizard's 15)
+- `rampup_speed`: "normal"
+- Reply rate is fixed at 30% server-side
 
 ---
 

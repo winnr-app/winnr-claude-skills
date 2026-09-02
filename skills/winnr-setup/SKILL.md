@@ -71,18 +71,19 @@ Ready to set up new infrastructure. How many domains would you like?
 
 ## Phase 2: Domain Strategy
 
-**Tools**: `winnr_suggest_domains`, `winnr_search_domains_bulk`
+**Tools**: `winnr_search_domains_bulk`
 
 ### Step 1: Generate domain ideas
 
 Ask the user for their brand keyword, industry, or target audience. Then:
 
-1. Call `winnr_suggest_domains` with their keyword to get AI-generated suggestions
+1. Generate 15-25 candidate names yourself (there is no suggestion tool) and check them all with `winnr_search_domains_bulk`
 2. Apply cold email domain naming best practices:
-   - **DO**: Use keyword variations, industry terms, action words
-   - **DO**: Mix TLDs (.io, .co, .xyz, .email, .app, .dev)
+   - **DO**: Make them look like a real company: brand + short word (acmehq.com, tryacme.com, acmeteam.com, getacme.co)
+   - **DO**: Prefer .com, then .net / .org / .co
+   - **DON'T**: Put outreach, blast, bulk, mail, marketing, campaign in the name — spam filters key on these
    - **DON'T**: Use the user's primary brand domain for cold email
-   - **DON'T**: Use spam-associated TLDs (.info, .biz, .click, .top)
+   - **DON'T**: Use spam-associated TLDs (.xyz, .info, .biz, .click, .top, .icu)
    - **DON'T**: Use domains that look too similar to the main brand
 3. If suggestions are insufficient, generate additional candidates:
    - Pattern: `{keyword}{suffix}.{tld}` where suffix is: hq, team, mail, labs, works, sends, reach, go, try, get
@@ -230,7 +231,7 @@ Total: 6 new mailboxes. Proceed? (yes/no)
 ### Step 3: Create mailboxes
 
 1. Build the bulk creation payload for each domain batch
-2. Call `winnr_bulk_create_email_users` with up to 100 users per call
+2. Call `winnr_bulk_create_email_users` once per domain (`domain` + `users`, up to 100 users per call)
 3. Track job IDs from the response
 4. Poll `winnr_get_job` for each job until all complete
 5. Report successes and failures
@@ -249,10 +250,10 @@ Total: 6 new mailboxes. Proceed? (yes/no)
 
 ### Step 2: Configure warming settings (optional, recommend defaults)
 
-Recommended defaults for new mailboxes:
-- `ramp_up`: true (gradually increase volume)
-- `daily_limit`: 15 (conservative start)
-- `reply_rate`: 30 (30% target reply rate)
+Recommended defaults for new mailboxes (pass them to `winnr_enable_warming` directly):
+- `emails_per_day`: 15 (conservative start; max 20)
+- `rampup_speed`: "normal" (gradually increase volume)
+- Reply rate is fixed server-side at 30% and cannot be changed
 
 Only adjust if user requests specific settings. The defaults are designed for maximum deliverability during the warming period.
 

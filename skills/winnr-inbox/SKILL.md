@@ -60,7 +60,8 @@ Pull messages. Sensible defaults:
 - **Filter**: honor domain / mailbox filters from the user prompt
 - **Limit**: start with 100. If more, page through or narrow by domain.
 
-For each message you plan to classify, call `winnr_get_message_body` to see
+For each message you plan to classify, call `winnr_get_message_body` with the
+row's `uid` AND `mailbox` (both come from the `winnr_list_inbox` row) to see
 enough of the reply to categorize accurately. Snippets alone hide
 unsubscribe language and out-of-office boilerplate.
 

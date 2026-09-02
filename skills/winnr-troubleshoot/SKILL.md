@@ -169,8 +169,8 @@ START → Call winnr_list_warming, find problematic mailboxes
   │   │       infrastructure issue on Winnr's side. Escalate to Winnr
   │   │       support with the domain list and the metrics dates.
   │   └─ Stagnant (not improving) → warming settings too aggressive
-  │       → winnr_update_warming_settings: daily_limit=10-15,
-  │         ramp_up=true
+  │       → winnr_update_warming_settings: emails_per_day=10-15,
+  │         rampup_enabled=true
   │
   ├─ Daily volume = 0 despite being "active"
   │   → Warming pool may still be ramping. First 24-48 h can be low.
@@ -180,7 +180,7 @@ START → Call winnr_list_warming, find problematic mailboxes
       ├─ Domain very new (<7 days) → Normal. Spam rate decreases over time.
       ├─ Domain aged but high spam → possible domain reputation issue.
       │   → Pause warming for 72 hours, then resume with conservative
-      │     settings (daily_limit=5, ramp_up=true).
+      │     settings (emails_per_day=5, rampup_enabled=true).
       └─ All mailboxes on the domain affected → domain-level problem.
           → Pause all warming on the domain.
           → Verify DNS, wait 72 h, re-enable conservatively.
@@ -203,7 +203,7 @@ START → Identify affected mailboxes from warming data
   │   ├─ DNS changed recently? → Run Tree A.
   │   └─ Reputation declined 7+ days? → Domain may be burned.
   │       → Recovery: disable warming 7 days, re-enable with
-  │         daily_limit=5, ramp_up=true.
+  │         emails_per_day=5, rampup_enabled=true.
   │
   ├─ Inbox rate <80% across ALL mailboxes
   │   → Account-level. Verify DNS on every domain (Tree A).
@@ -214,7 +214,7 @@ START → Identify affected mailboxes from warming data
   │   → Domain-level reputation problem.
   │   ├─ DNS fully configured? (Tree A)
   │   ├─ Domain age? (<30 days = patience, >30 days = concern)
-  │   ├─ Sending volume too high? → Reduce daily_limit.
+  │   ├─ Sending volume too high? → Reduce emails_per_day.
   │   └─ Consider: this domain may be burned. Retire and create a new
   │     one via /winnr scale or /winnr setup.
   │
@@ -243,7 +243,7 @@ When a domain's inbox rate drops below 60% or health score below 40:
 2. **Wait 72 hours**: let the domain cool down
 3. **Verify DNS**: full DNS check (Tree A)
 4. **Resume conservatively**: `winnr_enable_warming` +
-   `winnr_update_warming_settings` daily_limit=5, ramp_up=true
+   `winnr_update_warming_settings` emails_per_day=5, rampup_enabled=true
 5. **Monitor daily**: check metrics for 7 days
 6. **If no improvement after 14 days**: retire the domain and buy a new
    one via `/winnr scale` or `/winnr setup`

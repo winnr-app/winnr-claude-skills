@@ -49,7 +49,7 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 
 ---
 
-## MCP Tool Inventory (36 tools)
+## MCP Tool Inventory (54 tools in winnr-mcp 0.5.0; core ones below)
 
 ### Account (2)
 | Tool | Type | Description |
@@ -57,14 +57,14 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_get_account` | read | Account details, plan, limits |
 | `winnr_get_usage` | read | Domains/users used vs. plan limits |
 
-### Domains (13)
+### Domains (14)
 | Tool | Type | Description |
 |------|------|-------------|
 | `winnr_list_domains` | read | List all domains with status and user counts |
 | `winnr_get_domain` | read | Detailed info for one domain |
 | `winnr_search_domains` | read | Check single domain availability + price |
 | `winnr_search_domains_bulk` | read | Check up to 100 domains at once |
-| `winnr_suggest_domains` | read | AI domain name suggestions from keyword |
+| `winnr_check_dns_provider` | read | Where a domain's DNS/registrar lives today (before connect) |
 | `winnr_get_dns_status` | read | DNS record propagation status |
 | `winnr_get_dns_records` | read | Expected DNS records for manual setup |
 | `winnr_purchase_domains` | write | Purchase + setup domains (charges Stripe) |
@@ -82,16 +82,16 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_create_email_user` | write | Create single mailbox (async) |
 | `winnr_update_email_user` | write | Update name or password |
 | `winnr_delete_email_user` | write | Delete mailbox (async) |
-| `winnr_bulk_create_email_users` | write | Create up to 100 mailboxes at once |
+| `winnr_bulk_create_email_users` | write | Create up to 100 mailboxes on ONE domain (`domain` + `users`) |
 
 ### Inbox (5)
 | Tool | Type | Description |
 |------|------|-------------|
 | `winnr_list_inbox` | read | List emails across all mailboxes |
-| `winnr_get_message_body` | read | Full email body for a message |
+| `winnr_get_message_body` | read | Full body — needs `uid` + `mailbox` from the inbox row |
 | `winnr_send_email` | write | Send email from a mailbox |
 | `winnr_refresh_inbox` | write | Trigger inbox sync |
-| `winnr_delete_message` | write | Delete a message |
+| `winnr_delete_message` | write | Delete a message (`uid` + `mailbox`) |
 
 ### Warming (8)
 | Tool | Type | Description |
@@ -99,11 +99,11 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_list_warming` | read | All warming mailboxes with stats |
 | `winnr_get_warming_overview` | read | Aggregate warming statistics |
 | `winnr_get_warming_metrics` | read | Daily metrics for one mailbox |
-| `winnr_enable_warming` | write | Enable warming ($0.60/mailbox/month) |
+| `winnr_enable_warming` | write | Enable warming ($0.60/mailbox/month), takes `emails_per_day` + `rampup_speed` |
 | `winnr_disable_warming` | write | Disable warming and stop billing |
 | `winnr_pause_warming` | write | Temporarily pause warming |
 | `winnr_resume_warming` | write | Resume paused warming |
-| `winnr_update_warming_settings` | write | Adjust daily limit, ramp-up, reply rate |
+| `winnr_update_warming_settings` | write | `emails_per_day` (1-20), `rampup_enabled`, `rampup_speed` |
 
 ### Jobs (2)
 | Tool | Type | Description |
@@ -111,10 +111,15 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_list_jobs` | read | List recent async operations |
 | `winnr_get_job` | read | Status/progress of one job |
 
-### Export (1)
+### Export (2)
 | Tool | Type | Description |
 |------|------|-------------|
-| `winnr_export_email_users` | read | Export to CSV (15 formats supported) |
+| `winnr_list_export_formats` | read | Supported CSV formats |
+| `winnr_export_email_users` | read | Export to CSV (22 sequencer formats; needs `domains`, `emails` or `all_domains`) |
+
+Also available (see the winnr-mcp README): 7 pre-warmed marketplace tools
+(`winnr_browse_prewarmed`, `winnr_purchase_prewarmed`, ...) and 8 webhook tools
+(`winnr_list_webhooks`, `winnr_create_webhook`, ...).
 
 ---
 
@@ -125,13 +130,13 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 - **Warming timeline**: 14-21 days minimum before sending campaigns
 - **Healthy inbox rate**: >90% (green), 80-90% (yellow), <80% (red)
 - **Healthy health score**: >80 (green), 60-80 (yellow), <60 (red)
-- **Daily sending limit**: Start at 20-30/mailbox/day, scale to 50-80 after warmup
+- **Daily sending limit**: 10-15 cold emails/mailbox/day recommended; 50/day is the hard cap per mailbox (help: https://winnr.app/help/)
 
 ### TLD strategy
 - **Avoid for cold email**: .com of your main brand (protect it)
-- **Good for outreach**: .io, .co, .xyz, .email, .dev, .app
-- **Good for enterprise**: .com variants (different keyword, not your brand)
-- **Avoid entirely**: .info, .biz, .click, .top (spam-associated)
+- **Best for outreach**: .com first, then .net / .org / .co (different keyword, not your brand)
+- **Acceptable**: .io, .app, .dev when the brand fits
+- **Avoid entirely**: .xyz, .info, .biz, .click, .top, .icu (blacklist-prone)
 
 ### Naming conventions for mailboxes
 - Use realistic first.last format (john.smith, sarah.jones)
