@@ -115,7 +115,7 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | Tool | Type | Description |
 |------|------|-------------|
 | `winnr_list_export_formats` | read | Supported CSV formats |
-| `winnr_export_email_users` | read | Export to CSV (22 sequencer formats; needs `domains`, `emails` or `all_domains`) |
+| `winnr_export_email_users` | write | Export to CSV (22 sequencer formats; needs `domains`, `emails` or `all_domains`; write scope because the CSV has passwords) |
 
 Also available (see the winnr-mcp README): 7 pre-warmed marketplace tools
 (`winnr_browse_prewarmed`, `winnr_purchase_prewarmed`, ...) and 8 webhook tools
