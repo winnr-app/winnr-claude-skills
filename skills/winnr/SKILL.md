@@ -49,7 +49,7 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 
 ---
 
-## MCP Tool Inventory (54 tools in winnr-mcp 0.5.0; core ones below)
+## MCP Tool Inventory (55 tools in winnr-mcp 0.6.0; core ones below)
 
 ### Account (2)
 | Tool | Type | Description |
@@ -67,7 +67,7 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_check_dns_provider` | read | Where a domain's DNS/registrar lives today (before connect) |
 | `winnr_get_dns_status` | read | DNS record propagation status |
 | `winnr_get_dns_records` | read | Expected DNS records for manual setup |
-| `winnr_purchase_domains` | write | Purchase + setup domains (charges Stripe) |
+| `winnr_purchase_domains` | purchase | Buy + set up domains. TWO-STEP: call once for a quote + confirmation_token, show the user, then call again with the token |
 | `winnr_setup_domain` | write | Setup DNS/email for an owned domain |
 | `winnr_connect_domains` | write | Connect external domains, get nameservers |
 | `winnr_delete_domain` | write | Delete domain and all its users (async) |
@@ -99,17 +99,18 @@ This skill requires the **winnr-mcp** MCP server to be configured and running. I
 | `winnr_list_warming` | read | All warming mailboxes with stats |
 | `winnr_get_warming_overview` | read | Aggregate warming statistics |
 | `winnr_get_warming_metrics` | read | Daily metrics for one mailbox |
-| `winnr_enable_warming` | write | Enable warming ($0.60/mailbox/month), takes `emails_per_day` + `rampup_speed` |
+| `winnr_enable_warming` | purchase | Enable warming ($0.60/mailbox/month). TWO-STEP: quote → confirmation_token → confirm |
 | `winnr_disable_warming` | write | Disable warming and stop billing |
 | `winnr_pause_warming` | write | Temporarily pause warming |
 | `winnr_resume_warming` | write | Resume paused warming |
 | `winnr_update_warming_settings` | write | `emails_per_day` (1-20), `rampup_enabled`, `rampup_speed` |
 
-### Jobs (2)
+### Jobs (3)
 | Tool | Type | Description |
 |------|------|-------------|
 | `winnr_list_jobs` | read | List recent async operations |
 | `winnr_get_job` | read | Status/progress of one job |
+| `winnr_wait_for_job` | read | Block until a job finishes, streaming progress (prefer over polling) |
 
 ### Export (2)
 | Tool | Type | Description |

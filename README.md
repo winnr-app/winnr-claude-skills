@@ -1,6 +1,6 @@
 # Winnr Claude Code Skills
 
-Guided AI workflows for cold email infrastructure. These [Claude Code](https://claude.ai/claude-code) skills add cold email expertise on top of the [Winnr MCP server](https://github.com/winnr-app/winnr-mcp) — turning 54 raw API tools into intelligent, best-practice workflows.
+Guided AI workflows for cold email infrastructure. These [Claude Code](https://claude.ai/claude-code) skills add cold email expertise on top of the [Winnr MCP server](https://github.com/winnr-app/winnr-mcp) — turning 55 raw API tools into intelligent, best-practice workflows.
 
 **MCP gives your AI the tools. Skills give it the expertise.**
 
@@ -39,7 +39,7 @@ cp -r winnr-claude-skills/skills/* ~/.claude/skills/
 3. **winnr-mcp** — Add the MCP server to Claude Code:
 
 ```bash
-claude mcp add winnr -- env WINNR_API_TOKEN=wnr_your_token_here uvx winnr-mcp
+claude mcp add --scope user --transport http winnr https://mcp.winnr.app/mcp
 ```
 
 ## Usage examples
@@ -111,7 +111,7 @@ You (Claude Code) → /winnr setup
               - Output formatting
                       ↓
               Winnr MCP Server (winnr-mcp)
-              - 54 API tools
+              - 55 API tools
               - Authentication
               - Rate limiting
                       ↓
@@ -143,7 +143,7 @@ The `/winnr export` command supports these sequencer formats:
 ## Links
 
 - [Winnr](https://winnr.app) — Cold email infrastructure
-- [winnr-mcp](https://github.com/winnr-app/winnr-mcp) — MCP server (54 tools)
+- [winnr-mcp](https://github.com/winnr-app/winnr-mcp) — MCP server (55 tools)
 - [Skills landing page](https://winnr.app/skills.html) — Full documentation
 - [API docs](https://app.winnr.app/docs) — REST API reference
 
