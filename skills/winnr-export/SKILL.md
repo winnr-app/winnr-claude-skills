@@ -102,7 +102,7 @@ Download your {format} CSV:
 {download_url}
 
 This file contains {N} mailboxes with IMAP/SMTP credentials.
-The download link expires in 24 hours.
+The download link expires in 15 minutes. Run the export again for a fresh link.
 ```
 
 ### Step 3: Import Instructions
@@ -114,16 +114,18 @@ Provide tool-specific import guidance:
 1. Go to Smartlead → Email Accounts → Import
 2. Upload the CSV file
 3. Smartlead auto-maps the columns
-4. Set daily sending limit: start at 20-30/account/day
+4. Set daily sending limit: 10-20 cold emails/account/day (15 default),
+   50 or under in total including warming
 ```
 
 #### Instantly
 ```
 1. Go to Instantly → Accounts → Upload Accounts
 2. Upload the CSV file
-3. Columns are pre-formatted for Instantly's import
-4. Enable "Warm-up" in Instantly if you want to run both
-   (Note: Winnr warming + Instantly warm-up is fine to run simultaneously)
+3. Columns are pre-formatted for Instantly's import (Daily Limit 15,
+   Warmup Enabled FALSE)
+4. Warm with Winnr OR Instantly, not both: running both double-warms the
+   mailbox and pushes it past 50/day in total
 ```
 
 #### Lemlist
