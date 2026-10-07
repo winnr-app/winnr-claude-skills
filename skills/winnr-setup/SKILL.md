@@ -313,7 +313,7 @@ Generate `WINNR-SETUP-REPORT.md` with:
 ## Important Reminders
 
 - Do NOT send cold email campaigns until warming completes (at least 2 weeks, 4 on brand-new domains)
-- Start with 20-30 emails/mailbox/day and scale gradually
+- Start at 10 cold emails/mailbox/day and scale gradually to 20 at most (about 50/day per mailbox in total, warming included)
 - Monitor inbox rates — anything below 80% needs attention
 - Keep 3-5 mailboxes per domain for optimal reputation distribution
 ```
