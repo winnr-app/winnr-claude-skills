@@ -244,7 +244,7 @@ Same conventions as `/winnr setup`:
 - Enable warming on every new mailbox. Default settings are safe.
 - For batches **>20 mailboxes**, stagger over 2-3 days (10 per day) so
   warming pool ramp-up doesn't spike suspicion.
-- Warming takes 14-21 days minimum before the mailboxes are campaign-ready.
+- Warming takes at least 2 weeks (4 weeks on brand-new domains) before the mailboxes are campaign-ready.
 
 ---
 

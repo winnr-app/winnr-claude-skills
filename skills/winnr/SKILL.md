@@ -128,16 +128,16 @@ Also available (see the winnr-mcp README): 7 pre-warmed marketplace tools
 
 ### Key ratios and thresholds
 - **Mailboxes per domain**: 3-5 (optimal for cold outreach reputation distribution)
-- **Warming timeline**: 14-21 days minimum before sending campaigns
+- **Warming timeline**: at least 2 weeks (4 weeks on brand-new domains) before sending campaigns
 - **Healthy inbox rate**: >90% (green), 80-90% (yellow), <80% (red)
 - **Healthy health score**: >80 (green), 60-80 (yellow), <60 (red)
-- **Daily sending limit**: 10-15 cold emails/mailbox/day recommended; 50/day is the hard cap per mailbox (help: https://winnr.app/help/)
+- **Daily sending limit**: 10-20 cold emails/mailbox/day recommended; about 50/day per mailbox in total, warming included (help: https://winnr.app/help/)
 
 ### TLD strategy
 - **Avoid for cold email**: .com of your main brand (protect it)
 - **Best for outreach**: .com first, then .net / .org / .co (different keyword, not your brand)
 - **Acceptable**: .io, .app, .dev when the brand fits
-- **Avoid entirely**: .xyz, .info, .biz, .click, .top, .icu (blacklist-prone)
+- **Higher risk (avoid for primary sending)**: .xyz, .info, .biz, .click, .top, .icu (blacklist-prone; prefer .com/.net/.org/.co)
 
 ### Naming conventions for mailboxes
 - Use realistic first.last format (john.smith, sarah.jones)

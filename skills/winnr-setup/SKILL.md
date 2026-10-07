@@ -83,7 +83,7 @@ Ask the user for their brand keyword, industry, or target audience. Then:
    - **DO**: Prefer .com, then .net / .org / .co
    - **DON'T**: Put outreach, blast, bulk, mail, marketing, campaign in the name — spam filters key on these
    - **DON'T**: Use the user's primary brand domain for cold email
-   - **DON'T**: Use spam-associated TLDs (.xyz, .info, .biz, .click, .top, .icu)
+   - **AVOID for primary sending**: higher-risk, blacklist-prone TLDs (.xyz, .info, .biz, .click, .top, .icu). They are cheaper and Winnr sells some of them, but .com/.net/.org/.co carry the least risk
    - **DON'T**: Use domains that look too similar to the main brand
 3. If suggestions are insufficient, generate additional candidates:
    - Pattern: `{keyword}{suffix}.{tld}` where suffix is: hq, team, mail, labs, works, sends, reach, go, try, get
@@ -263,7 +263,7 @@ Warming enabled on {N} mailboxes.
 Monthly warming cost: ${N * 0.60}/month
 
 Settings: Gradual ramp-up, 15 emails/day max, 30% reply rate target.
-Mailboxes will be ready for outreach campaigns in 14-21 days.
+Mailboxes will be ready for outreach campaigns after at least 2 weeks of warming (4 weeks on brand-new domains).
 ```
 
 ---
@@ -303,7 +303,7 @@ Generate `WINNR-SETUP-REPORT.md` with:
 
 ## Next Steps
 
-1. **Wait 14-21 days** for warming to build sender reputation
+1. **Wait at least 2 weeks** (4 on brand-new domains) for warming to build sender reputation
 2. **Monitor health** daily with `/winnr health`
 3. **Export credentials** when ready with `/winnr export <tool>`
    - Smartlead: `/winnr export smartlead`
@@ -312,7 +312,7 @@ Generate `WINNR-SETUP-REPORT.md` with:
 
 ## Important Reminders
 
-- Do NOT send cold email campaigns until warming completes (14-21 days)
+- Do NOT send cold email campaigns until warming completes (at least 2 weeks, 4 on brand-new domains)
 - Start with 20-30 emails/mailbox/day and scale gradually
 - Monitor inbox rates — anything below 80% needs attention
 - Keep 3-5 mailboxes per domain for optimal reputation distribution
