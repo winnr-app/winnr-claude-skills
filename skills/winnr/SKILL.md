@@ -5,8 +5,8 @@ description: >
   mailboxes, control warming, monitor deliverability, and export data. Use when
   user says "winnr", "cold email", "email infrastructure", "domains", "mailboxes",
   "warming", "email accounts", "outreach setup", "deliverability", or asks to
-  manage email sending infrastructure. Requires winnr-mcp MCP server to be
-  configured with a valid Winnr API token.
+  manage email sending infrastructure. Requires the Winnr MCP server (hosted
+  connector at mcp.winnr.app/mcp, or the local winnr-mcp package with an API token).
 allowed-tools:
   - Bash
   - Read
