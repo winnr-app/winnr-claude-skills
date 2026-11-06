@@ -41,15 +41,14 @@ allowed-tools:
 
 This skill requires the **winnr-mcp** MCP server to be configured and running. If MCP tools prefixed with `winnr_` are not available, guide the user through setup:
 
-1. **Get an API token**: Sign up at [app.winnr.app](https://app.winnr.app), go to Settings → API Tokens, create a token
-2. **Add MCP server** (Claude Code): `claude mcp add winnr -- uvx winnr-mcp`
-   - Set `WINNR_API_TOKEN` environment variable, or pass inline:
-   - `claude mcp add winnr -- env WINNR_API_TOKEN=wnr_xxx uvx winnr-mcp`
+1. **Hosted server (recommended)**: `claude mcp add --scope user --transport http winnr https://mcp.winnr.app/mcp`, then sign in with the Winnr account when prompted. No token needed.
+2. **Or run it locally**: create a token on the **API** page at [app.winnr.app/api](https://app.winnr.app/api), then
+   `claude mcp add --scope user winnr -e WINNR_API_TOKEN=wnr_xxx -- uvx winnr-mcp`
 3. **Verify**: Call `winnr_get_account` — if it returns account data, you're ready
 
 ---
 
-## MCP Tool Inventory (55 tools in winnr-mcp 0.6.0; core ones below)
+## MCP Tool Inventory (55 tools in winnr-mcp 0.6.1; core ones below)
 
 ### Account (2)
 | Tool | Type | Description |
@@ -193,7 +192,7 @@ When MCP tools return errors, provide actionable next steps:
 
 | Error | Cause | Next Step |
 |-------|-------|-----------|
-| "Authentication failed" | Invalid or expired token | "Create a new token at app.winnr.app → Settings → API Tokens" |
+| "Authentication failed" | Invalid or expired token | "Reconnect the hosted connector, or create a new token on the API page (app.winnr.app/api)" |
 | "Rate limit exceeded" | Too many requests | "Wait 60 seconds and retry. Startup: 300 req/min, Enterprise: 500 req/min" |
 | "Insufficient permissions" | Read-only token used for write op | "Create a new token with read+write permissions" |
 | "Plan limit reached" | At capacity for domains or users | "Upgrade your plan at app.winnr.app → Settings → Billing, or delete unused resources" |

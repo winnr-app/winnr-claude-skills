@@ -35,7 +35,7 @@ cp -r winnr-claude-skills/skills/* ~/.claude/skills/
 ### Prerequisites
 
 1. **Claude Code** — [Install Claude Code](https://claude.ai/claude-code) if you haven't already
-2. **Winnr account** — [Sign up at app.winnr.app](https://app.winnr.app) and create an API token (Settings → API Tokens)
+2. **Winnr account** — [Sign up at app.winnr.app](https://app.winnr.app). The hosted server below signs you in with your Winnr account; an API token (created on the [API page](https://app.winnr.app/api)) is only needed for the local `uvx winnr-mcp` server
 3. **winnr-mcp** — Add the MCP server to Claude Code:
 
 ```bash

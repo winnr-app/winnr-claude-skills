@@ -69,10 +69,11 @@ else
   echo "  The Winnr skills require the winnr-mcp MCP server."
   echo "  Set it up with:"
   echo ""
-  echo "    claude mcp add winnr -- uvx winnr-mcp"
+  echo "    claude mcp add --scope user --transport http winnr https://mcp.winnr.app/mcp"
   echo ""
-  echo "  You'll need a Winnr API token from:"
-  echo "    https://app.winnr.app → Settings → API Tokens"
+  echo "  Then sign in with your Winnr account. (Prefer a local server? Create a"
+  echo "  token at https://app.winnr.app/api and run:"
+  echo "    claude mcp add --scope user winnr -e WINNR_API_TOKEN=wnr_YOUR_TOKEN -- uvx winnr-mcp)"
 fi
 
 echo ""
